@@ -22,22 +22,63 @@ export const Home = () => {
       </S.Header>
 
       <Car
-        brand="Audi"
-        name="RS 5 Coupé"
-        rent={{
-          period: "Ao dia",
-          price: "R$ 1.500,00",
+        data={{
+          brand: "Audi",
+          name: "RS 5 Coupé",
+          rent: {
+            period: "Ao dia",
+            price: "R$ 120",
+          },
+          thumbnail:
+            "https://production.autoforce.com/uploads/version/profile_image/3188/model_main_comprar-tiptronic_87272c1ff1.png",
         }}
-        thumbnail="https://production.autoforce.com/uploads/version/profile_image/3188/model_main_comprar-tiptronic_87272c1ff1.png"
+      />
+
+      <Car
+        data={{
+          brand: "Porsche",
+          name: "Panamera",
+          rent: {
+            period: "Ao dia",
+            price: "R$ 340",
+          },
+          thumbnail:
+            "https://freepikpsd.com/file/2019/10/porsche-panamera-png-5-Transparent-Images.png",
+        }}
       />
       <Car
-        brand="Porsche"
-        name="Panamera"
-        rent={{
-          period: "Ao dia",
-          price: "R$ 340",
+        data={{
+          brand: "Chevrolet",
+          name: "Corvette Z06",
+          rent: {
+            period: "Ao dia",
+            price: "R$ 620",
+          },
+          thumbnail: "https://i.imgur.com/rmSWoFR.png",
         }}
-        thumbnail="https://freepikpsd.com/file/2019/10/porsche-panamera-png-5-Transparent-Images.png"
+      />
+      <Car
+        data={{
+          brand: "Lamborghini",
+          name: "Huracan",
+          rent: {
+            period: "Ao dia",
+            price: "R$ 120",
+          },
+          thumbnail: "https://i.imgur.com/Ic2N3Ik.png",
+        }}
+      />
+      <Car
+        data={{
+          brand: "volvo",
+          name: "XC40",
+          rent: {
+            period: "Ao dia",
+            price: "R$ 120",
+          },
+          thumbnail:
+            "https://production.autoforce.com/uploads/version/profile_image/5654/comprar-r-design_3a5246be30.png",
+        }}
       />
     </S.Container>
   );

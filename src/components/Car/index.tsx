@@ -2,7 +2,7 @@ import * as S from "./styles";
 
 import GasolineSvg from "../../assets/gasoline.svg";
 
-type CarProps = {
+type CarType = {
   brand: string;
   name: string;
   rent: {
@@ -12,7 +12,13 @@ type CarProps = {
   thumbnail: string;
 };
 
-export const Car = ({ brand, name, rent, thumbnail }: CarProps) => {
+type CarProps = {
+  data: CarType;
+};
+
+export const Car = ({ data }: CarProps) => {
+  const { brand, name, rent, thumbnail } = data;
+
   return (
     <S.Container>
       <S.Details>
