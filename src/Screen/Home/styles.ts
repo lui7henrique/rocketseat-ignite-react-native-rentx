@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { StatusBar } from "react-native";
+import { StatusBar, FlatList } from "react-native";
 
 export const Container = styled.View`
   flex: 1;
@@ -21,6 +21,13 @@ export const HeaderContent = styled.View`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const CarsList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 24,
+  },
+  showsVerticalScrollIndicator: false,
+})``;
 
 export const TotalCars = styled.Text`
   font-size: ${RFValue(15)}px;
