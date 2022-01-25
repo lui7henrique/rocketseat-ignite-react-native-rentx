@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
 import { Accessory } from "../../components/Accessory";
+import { Button } from "../../components/Button";
 
 import AccelerationSvg from "../../assets/acceleration.svg";
 import SpeedSvg from "../../assets/speed.svg";
@@ -94,6 +95,10 @@ export const CarDetails = () => {
           para quem gosta de acelerar.
         </S.About>
       </S.Content>
+
+      <S.Footer>
+        <Button title="Teste" />
+      </S.Footer>
     </S.Container>
   );
 };

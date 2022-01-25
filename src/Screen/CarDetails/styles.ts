@@ -36,8 +36,6 @@ export const Details = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  margin-top: 38px;
 `;
 
 export const Description = styled.View``;
@@ -87,4 +85,13 @@ export const About = styled.Text`
   line-height: 25px;
 
   margin-top: 16px;
+`;
+
+export const Footer = styled.View`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  padding: 24px;
+  background-color: ${({ theme }) => theme.colors.background_secondary};
 `;
