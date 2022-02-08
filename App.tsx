@@ -18,7 +18,8 @@ import {
 } from "@expo-google-fonts/archivo";
 
 import theme from "./src/styles/theme";
-import { CarDetails } from "./src/Screen/CarDetails";
+import { Schedules } from "./src/Screen/Schedules";
+import { StatusBar } from "react-native";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -36,7 +37,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CarDetails />
+      <Schedules />
       {/* <Home /> */}
     </ThemeProvider>
   );
