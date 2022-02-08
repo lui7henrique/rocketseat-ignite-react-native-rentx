@@ -1,6 +1,7 @@
 import { StatusBar } from "react-native";
 
 import { BackButton } from "../../components/BackButton";
+import { Calendar } from "../../components/Calendar";
 
 import theme from "../../styles/theme";
 import * as S from "./styles";
@@ -34,7 +35,9 @@ export const Schedules = () => {
           </S.DateInfo>
         </S.RentalPeriod>
       </S.Header>
-      <S.Content></S.Content>
+      <S.Content>
+        <Calendar></Calendar>
+      </S.Content>
       <S.Footer>
         <Button title="Confirmar"></Button>
       </S.Footer>
