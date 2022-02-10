@@ -1,4 +1,5 @@
 import { StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { BackButton } from "../../components/BackButton";
 import { Calendar } from "../../components/Calendar";
@@ -10,6 +11,12 @@ import ArrowSvg from "../../assets/arrow.svg";
 import { Button } from "../../components/Button";
 
 export const Scheduling = () => {
+  const navigation = useNavigation();
+
+  const handleRentNow = () => {
+    navigation.navigate("SchedulingDetails");
+  };
+
   return (
     <S.Container>
       <StatusBar
@@ -39,7 +46,7 @@ export const Scheduling = () => {
         <Calendar></Calendar>
       </S.Content>
       <S.Footer>
-        <Button title="Confirmar"></Button>
+        <Button title="Confirmar" onPress={handleRentNow} />
       </S.Footer>
     </S.Container>
   );

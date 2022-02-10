@@ -1,5 +1,6 @@
-import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useMemo } from "react";
+import { StatusBar } from "react-native";
 
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
@@ -22,6 +23,8 @@ type Acessory = {
 };
 
 export const CarDetails = () => {
+  const navigation = useNavigation();
+
   const accessories: Acessory[] = useMemo(
     () => [
       {
@@ -52,10 +55,23 @@ export const CarDetails = () => {
     []
   );
 
+  const handleBackToHome = () => {
+    navigation.navigate("Home");
+  };
+
+  const handleGoToScheduling = () => {
+    navigation.navigate("Scheduling");
+  };
+
   return (
     <S.Container>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
       <S.Header>
-        <BackButton onPress={() => console.log("hello modafocka")} />
+        <BackButton onPress={handleBackToHome} />
       </S.Header>
 
       <S.CarImages>
@@ -85,7 +101,11 @@ export const CarDetails = () => {
 
         <S.Accessories>
           {accessories.map((accessory) => (
-            <Accessory icon={accessory.icon} name={accessory.name} />
+            <Accessory
+              icon={accessory.icon}
+              name={accessory.name}
+              key={JSON.stringify(accessory)}
+            />
           ))}
         </S.Accessories>
 
@@ -97,7 +117,7 @@ export const CarDetails = () => {
       </S.Content>
 
       <S.Footer>
-        <Button title="Teste" />
+        <Button title="Confirmar" onPress={handleGoToScheduling} />
       </S.Footer>
     </S.Container>
   );

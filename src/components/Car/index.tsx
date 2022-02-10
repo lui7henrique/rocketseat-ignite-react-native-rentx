@@ -1,6 +1,8 @@
-import * as S from "./styles";
+import { TouchableOpacityProps } from "react-native";
 
 import GasolineSvg from "../../assets/gasoline.svg";
+
+import * as S from "./styles";
 
 type CarType = {
   brand: string;
@@ -14,13 +16,13 @@ type CarType = {
 
 type CarProps = {
   data: CarType;
-};
+} & TouchableOpacityProps;
 
-export const Car = ({ data }: CarProps) => {
+export const Car = ({ data, ...rest }: CarProps) => {
   const { brand, name, rent, thumbnail } = data;
 
   return (
-    <S.Container>
+    <S.Container {...rest} activeOpacity={0.7}>
       <S.Details>
         <S.Brand>{brand}</S.Brand>
         <S.Name>{name}</S.Name>

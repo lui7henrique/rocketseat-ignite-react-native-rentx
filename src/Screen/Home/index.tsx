@@ -1,14 +1,17 @@
-import * as S from "./styles";
+import { useMemo } from "react";
 import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { Car } from "../../components/Car";
-import { useMemo } from "react";
-
 import uuid from "react-native-uuid";
+import { useNavigation } from "@react-navigation/native";
+
+import { Car } from "../../components/Car";
 
 import Logo from "../../assets/logo.svg";
+import * as S from "./styles";
 
 export const Home = () => {
+  const navigation = useNavigation();
+
   const fakeData = useMemo(
     () => [
       {
@@ -62,6 +65,11 @@ export const Home = () => {
     ],
     []
   );
+
+  const handleCarDetails = () => {
+    navigation.navigate("CarDetails");
+  };
+
   return (
     <S.Container>
       <StatusBar
@@ -78,9 +86,11 @@ export const Home = () => {
       </S.Header>
 
       <S.CarsList
-        data={[...fakeData, ...fakeData, ...fakeData, ...fakeData]}
+        data={fakeData}
         keyExtractor={(item) => String(uuid.v4())}
-        renderItem={({ item }) => <Car data={item as typeof fakeData[0]} />}
+        renderItem={({ item }) => (
+          <Car data={item as typeof fakeData[0]} onPress={handleCarDetails} />
+        )}
       />
     </S.Container>
   );
