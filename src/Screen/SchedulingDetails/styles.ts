@@ -127,6 +127,9 @@ export const Footer = styled.View`
 export const RentalPrice = styled.View`
   width: 100%;
   padding: 16px 0;
+
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const RentalPriceLabel = styled.Text`
@@ -137,13 +140,7 @@ export const RentalPriceLabel = styled.Text`
   text-transform: uppercase;
 `;
 
-export const RentalPriceDetails = styled.View`
-  width: 100%;
-
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
+export const RentalPriceDetails = styled.View``;
 
 export const RentalPriceQuota = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_500};

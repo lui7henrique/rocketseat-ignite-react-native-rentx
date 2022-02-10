@@ -119,11 +119,11 @@ export const SchedulingDetails = () => {
         </S.RentalPeriod>
 
         <S.RentalPrice>
-          <S.RentalPriceLabel>Total</S.RentalPriceLabel>
           <S.RentalPriceDetails>
+            <S.RentalPriceLabel>Total</S.RentalPriceLabel>
             <S.RentalPriceQuota>R$ 50,00 x3 diárias</S.RentalPriceQuota>
-            <S.RentalPriceTotal>R$ 150,00</S.RentalPriceTotal>
           </S.RentalPriceDetails>
+          <S.RentalPriceTotal>R$ 150,00</S.RentalPriceTotal>
         </S.RentalPrice>
       </S.Content>
 
