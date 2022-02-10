@@ -9,7 +9,7 @@ import * as S from "./styles";
 import ArrowSvg from "../../assets/arrow.svg";
 import { Button } from "../../components/Button";
 
-export const Schedules = () => {
+export const Scheduling = () => {
   return (
     <S.Container>
       <StatusBar
