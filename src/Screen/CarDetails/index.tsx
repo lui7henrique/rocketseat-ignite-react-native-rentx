@@ -10,11 +10,12 @@ import { Button } from "../../components/Button";
 import AccelerationSvg from "../../assets/acceleration.svg";
 import SpeedSvg from "../../assets/speed.svg";
 import ForceSvg from "../../assets/force.svg";
-import GasolineSvg from "../../assets/gasoline.svg";
 import ExchangeSvg from "../../assets/exchange.svg";
 import PeopleSvg from "../../assets/people.svg";
+import GasolineSvg from "../../assets/gasoline.svg";
 import EnergySvg from "../../assets/energy.svg";
 import HybridSvg from "../../assets/hybrid.svg";
+import CarSvg from "../../assets/car.svg";
 
 import * as S from "./styles";
 import { SvgProps } from "react-native-svg";
@@ -76,7 +77,7 @@ export const CarDetails = () => {
         <S.Accessories>
           {car.accessories.map((accessory) => (
             <Accessory
-              icon={iconByType[accessory.type]}
+              icon={iconByType[accessory.type] || CarSvg}
               name={accessory.name}
               key={JSON.stringify(accessory)}
             />
