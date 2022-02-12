@@ -17,7 +17,8 @@ export type CarType = {
         | "turning_diameter"
         | "electric_motor"
         | "exchange"
-        | "seats";
+        | "seats"
+        | "gasoline_motor";
       name: string;
     }
   ];

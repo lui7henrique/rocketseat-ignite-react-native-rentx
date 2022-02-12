@@ -34,8 +34,8 @@ export const Home = () => {
     fetchCars();
   }, []);
 
-  const handleCarDetails = () => {
-    navigation.navigate("CarDetails");
+  const handleCarDetails = (car: CarType) => {
+    navigation.navigate("CarDetails", { car });
   };
 
   return (
@@ -56,11 +56,14 @@ export const Home = () => {
       {loading ? (
         <Loading />
       ) : (
-        <S.CarsList
+        <S.CarList
           data={cars}
           keyExtractor={() => String(uuid.v4())}
           renderItem={({ item }) => (
-            <Car data={item as CarType} onPress={handleCarDetails} />
+            <Car
+              data={item as CarType}
+              onPress={() => handleCarDetails(item as CarType)}
+            />
           )}
         />
       )}

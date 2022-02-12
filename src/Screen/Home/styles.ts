@@ -22,7 +22,7 @@ export const HeaderContent = styled.View`
   justify-content: space-between;
 `;
 
-export const CarsList = styled(FlatList).attrs({
+export const CarList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 24,
   },

@@ -20,7 +20,7 @@ export const Car = ({ data, ...rest }: CarProps) => {
         <S.About>
           <S.Rent>
             <S.Period>{rent.period}</S.Period>
-            <S.Price>{rent.price}</S.Price>
+            <S.Price>R$ {rent.price}</S.Price>
           </S.Rent>
           <S.Type>
             <GasolineSvg />

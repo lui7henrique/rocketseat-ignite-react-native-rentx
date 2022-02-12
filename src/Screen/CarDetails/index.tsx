@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useMemo } from "react";
 import { StatusBar } from "react-native";
 
@@ -13,47 +13,30 @@ import ForceSvg from "../../assets/force.svg";
 import GasolineSvg from "../../assets/gasoline.svg";
 import ExchangeSvg from "../../assets/exchange.svg";
 import PeopleSvg from "../../assets/people.svg";
+import EnergySvg from "../../assets/energy.svg";
+import HybridSvg from "../../assets/hybrid.svg";
 
 import * as S from "./styles";
 import { SvgProps } from "react-native-svg";
-
-type Acessory = {
-  name: string;
-  icon: React.FC<SvgProps>;
-};
+import { CarType } from "../../types/car";
 
 export const CarDetails = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as { car: CarType };
 
-  const accessories: Acessory[] = useMemo(
-    () => [
-      {
-        name: "380km/h",
-        icon: SpeedSvg,
-      },
-      {
-        name: "3.2s",
-        icon: AccelerationSvg,
-      },
-      {
-        name: "800 HP",
-        icon: ForceSvg,
-      },
-      {
-        name: "Gasolina",
-        icon: GasolineSvg,
-      },
-      {
-        name: "Auto",
-        icon: ExchangeSvg,
-      },
-      {
-        name: "2 pessoas",
-        icon: PeopleSvg,
-      },
-    ],
-    []
-  );
+  const iconByType: { [key: string]: React.FC<SvgProps> } = {
+    acceleration: AccelerationSvg,
+    speed: SpeedSvg,
+    force: ForceSvg,
+    turning_diameter: ExchangeSvg,
+    electric_motor: EnergySvg,
+    gasoline_motor: GasolineSvg,
+    hybrid_motor: HybridSvg,
+    gasoline: GasolineSvg,
+    exchange: ExchangeSvg,
+    seats: PeopleSvg,
+  };
 
   const handleBackToHome = () => {
     navigation.navigate("Home");
@@ -75,45 +58,32 @@ export const CarDetails = () => {
       </S.Header>
 
       <S.CarImages>
-        <ImageSlider
-          images={[
-            "https://i.imgur.com/Ic2N3Ik.png",
-            "https://i.imgur.com/Ic2N3Ik.png",
-            "https://i.imgur.com/Ic2N3Ik.png",
-            "https://i.imgur.com/Ic2N3Ik.png",
-            "https://i.imgur.com/Ic2N3Ik.png",
-            "https://i.imgur.com/Ic2N3Ik.png",
-          ]}
-        />
+        <ImageSlider images={car.photos} />
       </S.CarImages>
 
       <S.Content>
         <S.Details>
           <S.Description>
-            <S.Brand>Lamborghini</S.Brand>
-            <S.Name>Huracan</S.Name>
+            <S.Brand>{car.brand}</S.Brand>
+            <S.Name>{car.name}</S.Name>
           </S.Description>
           <S.Rent>
-            <S.Period>Ao dia</S.Period>
-            <S.Price>R$ 50,00</S.Price>
+            <S.Period>{car.rent.period}</S.Period>
+            <S.Price>R$ {car.rent.price}</S.Price>
           </S.Rent>
         </S.Details>
 
         <S.Accessories>
-          {accessories.map((accessory) => (
+          {car.accessories.map((accessory) => (
             <Accessory
-              icon={accessory.icon}
+              icon={iconByType[accessory.type]}
               name={accessory.name}
               key={JSON.stringify(accessory)}
             />
           ))}
         </S.Accessories>
 
-        <S.About>
-          Este é automóvel desportivo. Surgiu do lendário touro de lide
-          indultado na praça Real Maestranza de Sevilla. É um belíssimo carro
-          para quem gosta de acelerar.
-        </S.About>
+        <S.About>{car.about}</S.About>
       </S.Content>
 
       <S.Footer>
