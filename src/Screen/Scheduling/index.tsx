@@ -3,19 +3,29 @@ import { StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MarkingProps } from "react-native-calendars/src/calendar/day/marking";
 import { DateData } from "react-native-calendars";
+import { format } from "date-fns";
+import Toast from "react-native-toast-message";
 
 import { BackButton } from "../../components/BackButton";
 import { Calendar } from "../../components/Calendar";
+import { generateInterval } from "../../components/Calendar/generateInterval";
+import { Button } from "../../components/Button";
 
 import theme from "../../styles/theme";
 import * as S from "./styles";
 
 import ArrowSvg from "../../assets/arrow.svg";
-import { Button } from "../../components/Button";
-import { generateInterval } from "../../components/Calendar/generateInterval";
+import { getPlatformDate } from "../../utils/getPlatformDate";
 
 type MarkedDatesType = {
   [key: string]: MarkingProps;
+};
+
+type RentalPeriod = {
+  start: number;
+  startFormatted: string;
+  end: number;
+  endFormatted: string;
 };
 
 export const Scheduling = () => {
@@ -25,11 +35,8 @@ export const Scheduling = () => {
   const [markedDates, setMarkedDates] = useState<MarkedDatesType>(
     {} as MarkedDatesType
   );
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>();
   const navigation = useNavigation();
-
-  const handleRentNow = () => {
-    navigation.navigate("SchedulingDetails");
-  };
 
   const handleChangeDate = (date: DateData) => {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
@@ -44,6 +51,33 @@ export const Scheduling = () => {
 
     const interval = generateInterval(start, end);
     setMarkedDates(interval);
+
+    const firstDate = Object.keys(interval)[0];
+    const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
+
+    setRentalPeriod({
+      start: start.timestamp,
+      end: end.timestamp,
+      startFormatted: format(
+        getPlatformDate(new Date(firstDate)),
+        "dd/MM/yyyy"
+      ),
+      endFormatted: format(getPlatformDate(new Date(endDate)), "dd/MM/yyyy"),
+    });
+  };
+
+  const handleConfirmRental = () => {
+    if (!rentalPeriod) {
+      Toast.show({
+        type: "error",
+        text1: "Faltam algumas informações!",
+        text2: `Insira a data de início e fim do aluguel 😉`,
+      });
+
+      return;
+    }
+
+    navigation.navigate("SchedulingDetails");
   };
 
   return (
@@ -54,10 +88,7 @@ export const Scheduling = () => {
         backgroundColor={theme.colors.header}
       />
       <S.Header>
-        <BackButton
-          color={theme.colors.background_secondary}
-          onPress={navigation.goBack}
-        />
+        <BackButton color={theme.colors.background_secondary} />
         <S.Title>
           Escolha uma {"\n"}data de início e {"\n"}fim do aluguel
         </S.Title>
@@ -65,12 +96,16 @@ export const Scheduling = () => {
         <S.RentalPeriod>
           <S.DateInfo>
             <S.DateTitle>De</S.DateTitle>
-            <S.DateValue selected={false}>18/11/2022</S.DateValue>
+            <S.DateValue selected={!!rentalPeriod?.startFormatted}>
+              {rentalPeriod?.startFormatted}
+            </S.DateValue>
           </S.DateInfo>
           <ArrowSvg />
           <S.DateInfo>
             <S.DateTitle>Até</S.DateTitle>
-            <S.DateValue selected={false}>18/12/2022</S.DateValue>
+            <S.DateValue selected={!!rentalPeriod?.endFormatted}>
+              {rentalPeriod?.endFormatted}
+            </S.DateValue>
           </S.DateInfo>
         </S.RentalPeriod>
       </S.Header>
@@ -81,7 +116,7 @@ export const Scheduling = () => {
         />
       </S.Content>
       <S.Footer>
-        <Button title="Confirmar" onPress={handleRentNow} />
+        <Button title="Confirmar" onPress={handleConfirmRental} />
       </S.Footer>
     </S.Container>
   );

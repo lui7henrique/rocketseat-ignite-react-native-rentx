@@ -17,6 +17,7 @@ import {
 } from "@expo-google-fonts/archivo";
 
 import theme from "./src/styles/theme";
+import { Toast } from "./src/components/Toast";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes />
+      <Toast />
       {/* <Home /> */}
     </ThemeProvider>
   );

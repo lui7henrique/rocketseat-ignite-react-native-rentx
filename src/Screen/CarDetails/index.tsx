@@ -55,7 +55,7 @@ export const CarDetails = () => {
         backgroundColor="transparent"
       />
       <S.Header>
-        <BackButton onPress={handleBackToHome} />
+        <BackButton />
       </S.Header>
 
       <S.CarImages>

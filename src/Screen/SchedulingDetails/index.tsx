@@ -70,7 +70,7 @@ export const SchedulingDetails = () => {
         backgroundColor="transparent"
       />
       <S.Header>
-        <BackButton onPress={() => console.log("hello modafocka")} />
+        <BackButton />
       </S.Header>
 
       <S.CarImages>
