@@ -39,12 +39,8 @@ export const CarDetails = () => {
     seats: PeopleSvg,
   };
 
-  const handleBackToHome = () => {
-    navigation.navigate("Home");
-  };
-
   const handleGoToScheduling = () => {
-    navigation.navigate("Scheduling");
+    navigation.navigate("Scheduling", { car });
   };
 
   return (

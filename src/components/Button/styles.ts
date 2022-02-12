@@ -1,7 +1,10 @@
 import { RFValue } from "react-native-responsive-fontsize";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled.TouchableOpacity<{ color?: string }>`
+export const Container = styled.TouchableOpacity<{
+  color?: string;
+  isLoading?: boolean;
+}>`
   width: 100%;
   padding: 20px;
   align-items: center;
@@ -12,6 +15,12 @@ export const Container = styled.TouchableOpacity<{ color?: string }>`
 
   ${({ disabled }) =>
     disabled &&
+    css`
+      opacity: 0.7;
+    `}
+
+  ${({ isLoading }) =>
+    isLoading &&
     css`
       opacity: 0.7;
     `}

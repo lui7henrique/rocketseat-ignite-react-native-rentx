@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { MarkingProps } from "react-native-calendars/src/calendar/day/marking";
 import { DateData } from "react-native-calendars";
 import { format } from "date-fns";
@@ -16,19 +16,22 @@ import * as S from "./styles";
 
 import ArrowSvg from "../../assets/arrow.svg";
 import { getPlatformDate } from "../../utils/getPlatformDate";
+import { CarType } from "../../types/car";
 
 type MarkedDatesType = {
   [key: string]: MarkingProps;
 };
 
 type RentalPeriod = {
-  start: number;
   startFormatted: string;
-  end: number;
   endFormatted: string;
 };
 
 export const Scheduling = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as { car: CarType };
+
   const [lastSelectedDate, setLastSelectedDate] = useState<DateData | null>(
     {} as DateData
   );
@@ -36,7 +39,6 @@ export const Scheduling = () => {
     {} as MarkedDatesType
   );
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>();
-  const navigation = useNavigation();
 
   const handleChangeDate = (date: DateData) => {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
@@ -56,8 +58,6 @@ export const Scheduling = () => {
     const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
 
     setRentalPeriod({
-      start: start.timestamp,
-      end: end.timestamp,
       startFormatted: format(
         getPlatformDate(new Date(firstDate)),
         "dd/MM/yyyy"
@@ -77,7 +77,10 @@ export const Scheduling = () => {
       return;
     }
 
-    navigation.navigate("SchedulingDetails");
+    navigation.navigate("SchedulingDetails", {
+      car,
+      dates: Object.keys(markedDates),
+    });
   };
 
   return (
