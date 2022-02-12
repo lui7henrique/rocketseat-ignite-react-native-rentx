@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MarkingProps } from "react-native-calendars/src/calendar/day/marking";
@@ -17,6 +17,8 @@ import * as S from "./styles";
 import ArrowSvg from "../../assets/arrow.svg";
 import { getPlatformDate } from "../../utils/getPlatformDate";
 import { CarType } from "../../types/car";
+import { api } from "../../services/api";
+import { Loading } from "../../components/Loading";
 
 type MarkedDatesType = {
   [key: string]: MarkingProps;
@@ -38,7 +40,11 @@ export const Scheduling = () => {
   const [markedDates, setMarkedDates] = useState<MarkedDatesType>(
     {} as MarkedDatesType
   );
+  const [unavailableDates, setUnavailableDates] = useState<MarkedDatesType>(
+    {} as MarkedDatesType
+  );
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChangeDate = (date: DateData) => {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
@@ -52,7 +58,7 @@ export const Scheduling = () => {
     setLastSelectedDate(end);
 
     const interval = generateInterval(start, end);
-    setMarkedDates(interval);
+    setMarkedDates({ ...unavailableDates, ...interval });
 
     const firstDate = Object.keys(interval)[0];
     const endDate = Object.keys(interval)[Object.keys(interval).length - 1];
@@ -83,6 +89,37 @@ export const Scheduling = () => {
     });
   };
 
+  useEffect(() => {
+    const getUnavailableDates = async () => {
+      const { data } = await api.get<{ unavailable_dates: Array<string> }>(
+        `schedules_by_car/${car.id}/`
+      );
+
+      let unavailableDates: MarkedDatesType = {};
+
+      data.unavailable_dates.forEach((item) => {
+        const date = format(getPlatformDate(new Date(item)), "yyyy-MM-dd");
+
+        unavailableDates = {
+          ...unavailableDates,
+          [date]: {
+            inactive: true,
+            disableTouchEvent: true,
+            disabled: true,
+          },
+        };
+
+        return unavailableDates;
+      });
+
+      setMarkedDates(unavailableDates);
+      setUnavailableDates(unavailableDates);
+      setIsLoading(false);
+    };
+
+    getUnavailableDates();
+  }, []);
+
   return (
     <S.Container>
       <StatusBar
@@ -112,12 +149,20 @@ export const Scheduling = () => {
           </S.DateInfo>
         </S.RentalPeriod>
       </S.Header>
-      <S.Content>
-        <Calendar
-          onDayPress={(date) => handleChangeDate(date)}
-          markedDates={markedDates}
-        />
-      </S.Content>
+
+      {isLoading ? (
+        <S.ContentLoading>
+          <Loading />
+        </S.ContentLoading>
+      ) : (
+        <S.Content>
+          <Calendar
+            onDayPress={(date) => handleChangeDate(date)}
+            markedDates={markedDates}
+          />
+        </S.Content>
+      )}
+
       <S.Footer>
         <Button title="Confirmar" onPress={handleConfirmRental} />
       </S.Footer>

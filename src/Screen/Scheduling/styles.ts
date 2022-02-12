@@ -59,6 +59,11 @@ export const DateValue = styled.Text<{ selected?: boolean }>`
     `}
 `;
 
+export const ContentLoading = styled.View`
+  flex: 1;
+  height: 100%;
+`;
+
 export const Content = styled.ScrollView.attrs({
   contentContainerStyle: {
     paddingBottom: 24,
