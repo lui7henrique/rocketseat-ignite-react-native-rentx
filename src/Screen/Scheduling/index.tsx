@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { MarkingProps } from "react-native-calendars/src/calendar/day/marking";
+import { DateData } from "react-native-calendars";
 
 import { BackButton } from "../../components/BackButton";
 import { Calendar } from "../../components/Calendar";
@@ -9,12 +12,38 @@ import * as S from "./styles";
 
 import ArrowSvg from "../../assets/arrow.svg";
 import { Button } from "../../components/Button";
+import { generateInterval } from "../../components/Calendar/generateInterval";
+
+type MarkedDatesType = {
+  [key: string]: MarkingProps;
+};
 
 export const Scheduling = () => {
+  const [lastSelectedDate, setLastSelectedDate] = useState<DateData | null>(
+    {} as DateData
+  );
+  const [markedDates, setMarkedDates] = useState<MarkedDatesType>(
+    {} as MarkedDatesType
+  );
   const navigation = useNavigation();
 
   const handleRentNow = () => {
     navigation.navigate("SchedulingDetails");
+  };
+
+  const handleChangeDate = (date: DateData) => {
+    let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
+    let end = date;
+
+    if (start.timestamp > end.timestamp) {
+      start = end;
+      end = start;
+    }
+
+    setLastSelectedDate(end);
+
+    const interval = generateInterval(start, end);
+    setMarkedDates(interval);
   };
 
   return (
@@ -25,7 +54,10 @@ export const Scheduling = () => {
         backgroundColor={theme.colors.header}
       />
       <S.Header>
-        <BackButton color={theme.colors.background_secondary} />
+        <BackButton
+          color={theme.colors.background_secondary}
+          onPress={navigation.goBack}
+        />
         <S.Title>
           Escolha uma {"\n"}data de início e {"\n"}fim do aluguel
         </S.Title>
@@ -43,7 +75,10 @@ export const Scheduling = () => {
         </S.RentalPeriod>
       </S.Header>
       <S.Content>
-        <Calendar></Calendar>
+        <Calendar
+          onDayPress={(date) => handleChangeDate(date)}
+          markedDates={markedDates}
+        />
       </S.Content>
       <S.Footer>
         <Button title="Confirmar" onPress={handleRentNow} />

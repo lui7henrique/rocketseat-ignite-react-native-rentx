@@ -3,6 +3,7 @@ import { ptBR } from "./localeConfig";
 import {
   Calendar as CustomCalendar,
   LocaleConfig,
+  CalendarProps as ReactNativeCalendarProps,
 } from "react-native-calendars";
 import { useTheme } from "styled-components";
 
@@ -11,7 +12,13 @@ import * as S from "./styles";
 LocaleConfig.locales["pt-br"] = ptBR;
 LocaleConfig.defaultLocale = "pt-br";
 
-export const Calendar = () => {
+type CalendarProps = ReactNativeCalendarProps;
+
+export const Calendar = ({
+  markedDates,
+  onDayPress,
+  ...rest
+}: CalendarProps) => {
   const theme = useTheme();
 
   return (
@@ -44,6 +51,10 @@ export const Calendar = () => {
       }}
       firstDay={1}
       minDate={String(new Date())}
+      markingType="period"
+      markedDates={markedDates}
+      onDayPress={onDayPress}
+      {...rest}
     />
   );
 };
