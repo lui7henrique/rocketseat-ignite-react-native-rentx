@@ -1,70 +1,38 @@
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
 
+import { api } from "../../services/api";
+
 import { Car } from "../../components/Car";
+import { Loading } from "../../components/Loading";
+
+import { CarType } from "../../types/car";
 
 import Logo from "../../assets/logo.svg";
 import * as S from "./styles";
 
 export const Home = () => {
+  const [cars, setCars] = useState([] as CarType[]);
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const fakeData = useMemo(
-    () => [
-      {
-        brand: "Audi",
-        name: "RS 5 Coupé",
-        rent: {
-          period: "Ao dia",
-          price: "R$ 120",
-        },
-        thumbnail:
-          "https://production.autoforce.com/uploads/version/profile_image/3188/model_main_comprar-tiptronic_87272c1ff1.png",
-      },
-      {
-        brand: "Porsche",
-        name: "Panamera",
-        rent: {
-          period: "Ao dia",
-          price: "R$ 340",
-        },
-        thumbnail:
-          "https://freepikpsd.com/file/2019/10/porsche-panamera-png-5-Transparent-Images.png",
-      },
-      {
-        brand: "Chevrolet",
-        name: "Corvette Z06",
-        rent: {
-          period: "Ao dia",
-          price: "R$ 620",
-        },
-        thumbnail: "https://i.imgur.com/rmSWoFR.png",
-      },
-      {
-        brand: "Lamborghini",
-        name: "Huracan",
-        rent: {
-          period: "Ao dia",
-          price: "R$ 120",
-        },
-        thumbnail: "https://i.imgur.com/Ic2N3Ik.png",
-      },
-      {
-        brand: "volvo",
-        name: "XC40",
-        rent: {
-          period: "Ao dia",
-          price: "R$ 120",
-        },
-        thumbnail:
-          "https://production.autoforce.com/uploads/version/profile_image/5654/comprar-r-design_3a5246be30.png",
-      },
-    ],
-    []
-  );
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const { data } = await api.get<CarType[]>("/cars");
+        setCars(data);
+      } catch (err: unknown) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCars();
+  }, []);
 
   const handleCarDetails = () => {
     navigation.navigate("CarDetails");
@@ -81,17 +49,21 @@ export const Home = () => {
       <S.Header>
         <S.HeaderContent>
           <Logo width={RFValue(118)} height={RFValue(12)} />
-          <S.TotalCars>Total de 12 Carros</S.TotalCars>
+          <S.TotalCars>Total de {cars.length} Carros</S.TotalCars>
         </S.HeaderContent>
       </S.Header>
 
-      <S.CarsList
-        data={fakeData}
-        keyExtractor={(item) => String(uuid.v4())}
-        renderItem={({ item }) => (
-          <Car data={item as typeof fakeData[0]} onPress={handleCarDetails} />
-        )}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <S.CarsList
+          data={cars}
+          keyExtractor={() => String(uuid.v4())}
+          renderItem={({ item }) => (
+            <Car data={item as CarType} onPress={handleCarDetails} />
+          )}
+        />
+      )}
     </S.Container>
   );
 };

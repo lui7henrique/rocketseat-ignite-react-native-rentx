@@ -1,18 +1,9 @@
 import { TouchableOpacityProps } from "react-native";
+import { CarType } from "../../types/car";
 
 import GasolineSvg from "../../assets/gasoline.svg";
 
 import * as S from "./styles";
-
-type CarType = {
-  brand: string;
-  name: string;
-  rent: {
-    period: string;
-    price: string;
-  };
-  thumbnail: string;
-};
 
 type CarProps = {
   data: CarType;
