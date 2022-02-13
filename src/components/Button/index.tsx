@@ -27,7 +27,7 @@ export const Button = (props: ButtonProps) => {
       {...rest}
     >
       {isLoading ? (
-        <Loading color={loadingColor} />
+        <Loading color={loadingColor} size="small" />
       ) : (
         <S.Title>{title}</S.Title>
       )}

@@ -34,3 +34,17 @@ export const TotalCars = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   color: ${({ theme }) => theme.colors.text};
 `;
+
+export const MyCarsButton = styled.TouchableOpacity`
+  width: 60px;
+  height: 60px;
+  background-color: ${({ theme }) => theme.colors.main};
+
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+`;
