@@ -1,12 +1,16 @@
-import { StatusBar, StyleSheet } from "react-native";
+import { StatusBar, StyleSheet, Dimensions } from "react-native";
 import { Button } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  withTiming,
+  Easing,
 } from "react-native-reanimated";
 
 import * as S from "./styles";
 import theme from "../../styles/theme";
+
+const WIDTH = Dimensions.get("window").width;
 
 export const Splash = () => {
   const animation = useSharedValue(0);
@@ -15,14 +19,17 @@ export const Splash = () => {
     return {
       transform: [
         {
-          translateX: animation.value,
+          translateX: withTiming(animation.value, {
+            duration: 500,
+            easing: Easing.bezier(1, -0.07, 1, 0.67),
+          }),
         },
       ],
     };
   });
 
   const handleAnimationPosition = () => {
-    animation.value += 100;
+    animation.value = Math.random() * WIDTH - 100;
   };
 
   return (
