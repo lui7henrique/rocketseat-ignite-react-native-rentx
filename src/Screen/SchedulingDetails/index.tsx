@@ -71,6 +71,13 @@ export const SchedulingDetails = () => {
 
       const unavailableDates = [...data.unavailable_dates, ...dates];
 
+      await api.post("/schedules_by_user", {
+        user_id: 1,
+        car,
+        start_date: rentalPeriod.start,
+        end_date: rentalPeriod.end,
+      });
+
       await api.put(`/schedules_by_car/${car.id}`, {
         id: car.id,
         unavailable_dates: unavailableDates,
