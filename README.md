@@ -12,9 +12,11 @@
 # Install the dependencies
 $ yarn
 
-# Run the expo app
-$ expo start
-
 # Run the backend fake server
 $ yarn server
 ```
+
+# Run the expo app
+$ expo start
+
+
