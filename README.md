@@ -4,7 +4,7 @@
 
 ### 💻 Requirements
 
-- You need to install both [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) to run this project.
+- You need to install [Node.js](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/) and [Expo CLI](https://docs.expo.dev/workflow/expo-cli/) to run this project.
 
 **Follow the steps below**
 
@@ -12,9 +12,11 @@
 # Install the dependencies
 $ yarn
 
-# Run the expo app
-$ expo start
-
 # Run the backend fake server
 $ yarn server
 ```
+
+# Run the expo app
+$ expo start
+
+
