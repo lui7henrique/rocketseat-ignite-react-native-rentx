@@ -28,8 +28,8 @@ export const Car = ({ data, startDate, endDate, ...rest }: CarProps) => {
   };
 
   return (
-    <S.Container>
-      <S.MainContent {...rest} activeOpacity={0.7}>
+    <S.Container {...rest} activeOpacity={0.7}>
+      <S.MainContent>
         <S.Details>
           <S.Brand>{brand}</S.Brand>
           <S.Name>{name}</S.Name>

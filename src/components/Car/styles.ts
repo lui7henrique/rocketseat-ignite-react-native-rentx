@@ -5,7 +5,7 @@ export const Container = styled.TouchableOpacity`
   margin-bottom: 16px;
 `;
 
-export const MainContent = styled.TouchableOpacity`
+export const MainContent = styled.View`
   height: 126px;
   width: 100%;
 

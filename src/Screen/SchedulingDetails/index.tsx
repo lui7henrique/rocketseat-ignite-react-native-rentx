@@ -183,7 +183,7 @@ export const SchedulingDetails = () => {
 
       <S.Footer>
         <Button
-          title="Confirmar"
+          title="Alugar"
           onPress={handleConfirmRental}
           isLoading={isLoading}
         />

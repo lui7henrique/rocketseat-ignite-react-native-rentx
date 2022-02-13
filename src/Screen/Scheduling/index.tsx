@@ -164,7 +164,7 @@ export const Scheduling = () => {
       )}
 
       <S.Footer>
-        <Button title="Confirmar" onPress={handleConfirmRental} />
+        <Button title="Escolher período" onPress={handleConfirmRental} />
       </S.Footer>
     </S.Container>
   );
