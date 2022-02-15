@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+import { StatusBar, BackHandler } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
@@ -36,6 +36,12 @@ export const Home = () => {
     fetchCars();
   }, []);
 
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
+  }, []);
+
   const handleCarDetails = (car: CarType) => {
     navigation.navigate("CarDetails", { car });
   };
@@ -55,7 +61,7 @@ export const Home = () => {
       <S.Header>
         <S.HeaderContent>
           <Logo width={RFValue(118)} height={RFValue(12)} />
-          <S.TotalCars>Total de {cars.length} Carros</S.TotalCars>
+          {!loading && <S.TotalCars>Total de {cars.length} Carros</S.TotalCars>}
         </S.HeaderContent>
       </S.Header>
 
