@@ -1,5 +1,6 @@
 import { StatusBar } from "react-native";
 import { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import BrandSvg from "../../assets/brand.svg";
 import LogoSvg from "../../assets/logo.svg";
@@ -10,12 +11,14 @@ import Animated, {
   withTiming,
   interpolate,
   Extrapolate,
+  runOnJS,
 } from "react-native-reanimated";
 
 import * as S from "./styles";
 import theme from "../../styles/theme";
 
 export const Splash = () => {
+  const navigation = useNavigation();
   const splashAnimation = useSharedValue(0);
 
   const brandStyle = useAnimatedStyle(() => {
@@ -50,8 +53,15 @@ export const Splash = () => {
     };
   });
 
+  const startApp = () => {
+    navigation.navigate("Home");
+  };
+
   useEffect(() => {
-    splashAnimation.value = withTiming(50, { duration: 5000 });
+    splashAnimation.value = withTiming(50, { duration: 2000 }, () => {
+      "worklet";
+      runOnJS(startApp)();
+    });
   }, []);
 
   return (
@@ -62,7 +72,7 @@ export const Splash = () => {
         backgroundColor={theme.colors.header}
       />
       <Animated.View style={brandStyle}>
-        <BrandSvg width={100} height={60} />
+        <BrandSvg width={90} height={60} />
       </Animated.View>
 
       <Animated.View style={logoStyle}>

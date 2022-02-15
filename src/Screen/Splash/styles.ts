@@ -8,3 +8,7 @@ export const Container = styled.View`
 
   background-color: ${({ theme }) => theme.colors.header};
 `;
+
+export const Content = styled.View`
+  margin-top: 4px;
+`;
