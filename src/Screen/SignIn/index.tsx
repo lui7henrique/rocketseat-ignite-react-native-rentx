@@ -6,6 +6,8 @@ import {
   Alert,
 } from "react-native";
 import { useTheme } from "styled-components";
+import * as Yup from "yup";
+import Toast from "react-native-toast-message";
 
 import { useState } from "react";
 
@@ -19,6 +21,34 @@ export const SignIn = () => {
   const [password, setPassword] = useState("");
 
   const theme = useTheme();
+
+  const handleSignIn = async () => {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required("E-mail obrigatório")
+          .email("Digite um e-mail válido! 😉"),
+        password: Yup.string().required("Senha obrigatória 😉"),
+      });
+
+      await schema.validate({ email, password });
+      Alert.alert("Sucesso", "Login realizado com sucesso");
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        return Toast.show({
+          type: "error",
+          text1: "Faltam algumas informações!",
+          text2: err.message,
+        });
+      } else {
+        return Toast.show({
+          type: "error",
+          text1: "Não foi possível realizar o login! 😞",
+          text2: "Verifique as credenciais e tente novamente.",
+        });
+      }
+    }
+  };
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -55,16 +85,11 @@ export const SignIn = () => {
             />
           </S.Form>
           <S.Footer>
-            <Button
-              title="Login"
-              onPress={() => Alert.alert(`${email} e ${password}`)}
-              isLoading={false}
-            />
+            <Button title="Login" onPress={handleSignIn} isLoading={false} />
             <Button
               color={theme.colors.background_secondary}
               textColor={theme.colors.title}
               title="Criar conta gratuita"
-              onPress={() => {}}
               isLoading={false}
             />
           </S.Footer>

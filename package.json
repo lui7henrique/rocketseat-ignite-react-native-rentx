@@ -37,7 +37,8 @@
     "react-native-toast-message": "^2.1.1",
     "react-native-uuid": "^2.0.1",
     "react-native-web": "0.17.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
