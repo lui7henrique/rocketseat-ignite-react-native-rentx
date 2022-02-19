@@ -9,10 +9,10 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: 113px;
+  height: 120px;
 
   background-color: ${({ theme }) => theme.colors.header};
-  padding: ${`${StatusBar.currentHeight + 32}px`} 24px 32px 24px;
+  padding: ${`${StatusBar.currentHeight + 64}`}px 24px 24px 24px;
 `;
 
 export const HeaderContent = styled.View`

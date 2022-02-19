@@ -15,24 +15,32 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 
 import * as S from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const theme = useTheme();
+  const navigation = useNavigation();
 
   const handleSignIn = async () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .required("E-mail obrigatório")
+          .required("E-mail obrigatório 😉")
           .email("Digite um e-mail válido! 😉"),
         password: Yup.string().required("Senha obrigatória 😉"),
       });
 
       await schema.validate({ email, password });
-      Alert.alert("Sucesso", "Login realizado com sucesso");
+
+      if (
+        email === "luizhenrique@fodao.com" &&
+        password === "luizhenriquefodao"
+      ) {
+        navigation.navigate("Home");
+      }
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         return Toast.show({
@@ -50,6 +58,10 @@ export const SignIn = () => {
     }
   };
 
+  const handleRedirectToCreateAccount = () => {
+    navigation.navigate("SignUpFirstStep");
+  };
+
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -62,7 +74,8 @@ export const SignIn = () => {
           <S.Header>
             <S.Title>Estamos {"\n"}quase lá</S.Title>
             <S.Subtitle>
-              Faça seu cadastro{"\n"}de forma rápida e fácil.
+              Faça seu login para começar{"\n"}
+              uma experiência incrível.
             </S.Subtitle>
           </S.Header>
 
@@ -91,6 +104,7 @@ export const SignIn = () => {
               textColor={theme.colors.title}
               title="Criar conta gratuita"
               isLoading={false}
+              onPress={handleRedirectToCreateAccount}
             />
           </S.Footer>
         </S.Container>

@@ -44,8 +44,8 @@ export const MyCars = () => {
     <S.Container>
       <StatusBar
         barStyle="light-content"
+        backgroundColor={theme.colors.main}
         translucent
-        backgroundColor={theme.colors.header}
       />
       <S.Header>
         <BackButton color={theme.colors.background_secondary} />

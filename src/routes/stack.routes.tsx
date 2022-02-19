@@ -9,6 +9,7 @@ import { CarDetails } from "../Screen/CarDetails";
 import { MyCars } from "../Screen/MyCars";
 import { Splash } from "../Screen/Splash";
 import { SignIn } from "../Screen/SignIn";
+import { SignUpFirstStep } from "../Screen/SignUp/SignUpFirstStep";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export const StackRoutes = () => {
     <Navigator screenOptions={{ headerShown: false }} initialRouteName="SignIn">
       <Screen name="Splash" component={Splash} />
       <Screen name="SignIn" component={SignIn} />
+      <Screen name="SignUpFirstStep" component={SignUpFirstStep} />
       <Screen
         name="Home"
         component={Home}
