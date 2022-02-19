@@ -2,7 +2,7 @@
 
 - [Figma](https://www.figma.com/file/4ojyGi2mGuQaGK0sUHMAqB/RentX-Ignite?node-id=0%3A1)
 
-# 🔨 Tools
+## 🔨 Tools
 
 - [Typescript](https://www.typescriptlang.org/)
 - [React Native](https://reactnative.dev/)
