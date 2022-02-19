@@ -8,13 +8,15 @@ import { SchedulingDetails } from "../Screen/SchedulingDetails";
 import { CarDetails } from "../Screen/CarDetails";
 import { MyCars } from "../Screen/MyCars";
 import { Splash } from "../Screen/Splash";
+import { SignIn } from "../Screen/SignIn";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
-    <Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
+    <Navigator screenOptions={{ headerShown: false }} initialRouteName="SignIn">
       <Screen name="Splash" component={Splash} />
+      <Screen name="SignIn" component={SignIn} />
       <Screen
         name="Home"
         component={Home}

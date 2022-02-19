@@ -6,6 +6,7 @@ import * as S from "./styles";
 type ButtonProps = {
   title: string;
   color?: string;
+  textColor?: string;
   isLoading?: boolean;
   loadingColor?: string;
 } & TouchableOpacityProps;
@@ -14,6 +15,7 @@ export const Button = (props: ButtonProps) => {
   const {
     title,
     color,
+    textColor,
     isLoading,
     loadingColor = theme.colors.background_primary,
     ...rest
@@ -29,7 +31,7 @@ export const Button = (props: ButtonProps) => {
       {isLoading ? (
         <Loading color={loadingColor} size="small" />
       ) : (
-        <S.Title>{title}</S.Title>
+        <S.Title textColor={textColor}>{title}</S.Title>
       )}
     </S.Container>
   );
