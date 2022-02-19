@@ -13,6 +13,8 @@ export const Container = styled.TouchableOpacity<{
   background-color: ${({ theme, color }) =>
     color ? color : theme.colors.main};
 
+  margin-bottom: 8px;
+
   ${({ disabled }) =>
     disabled &&
     css`

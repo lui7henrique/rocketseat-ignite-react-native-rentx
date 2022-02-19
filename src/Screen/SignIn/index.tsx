@@ -1,6 +1,7 @@
 import { StatusBar, View } from "react-native";
 import { useTheme } from "styled-components";
 import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 import * as S from "./styles";
 
 export const SignIn = () => {
@@ -17,6 +18,10 @@ export const SignIn = () => {
         <S.Title>Estamos {"\n"}quase lá</S.Title>
         <S.Subtitle>Faça seu cadastro{"\n"}de forma rápida e fácil.</S.Subtitle>
       </S.Header>
+
+      <S.Form>
+        <Input iconName="mail" placeholder="teste" />
+      </S.Form>
       <S.Footer>
         <Button title="Login" onPress={() => {}} isLoading={false} />
         <Button
