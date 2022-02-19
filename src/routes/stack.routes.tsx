@@ -1,16 +1,16 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Home } from "../Screen/Home";
-import { Scheduling } from "../Screen/Scheduling";
-import { SchedulingComplete } from "../Screen/SchedulingComplete";
-import { SchedulingDetails } from "../Screen/SchedulingDetails";
-import { CarDetails } from "../Screen/CarDetails";
-import { MyCars } from "../Screen/MyCars";
-import { Splash } from "../Screen/Splash";
-import { SignIn } from "../Screen/SignIn";
-import { SignUpFirstStep } from "../Screen/SignUp/SignUpFirstStep";
-import { SignUpSecondStep } from "../Screen/SignUp/SignUpSecondStep";
+import { Home } from "../screen/Home";
+import { Scheduling } from "../screen/Scheduling";
+import { Success } from "../screen/Success";
+import { SchedulingDetails } from "../screen/SchedulingDetails";
+import { CarDetails } from "../screen/CarDetails";
+import { MyCars } from "../screen/MyCars";
+import { Splash } from "../screen/Splash";
+import { SignIn } from "../screen/SignIn";
+import { SignUpFirstStep } from "../screen/SignUp/SignUpFirstStep";
+import { SignUpSecondStep } from "../screen/SignUp/SignUpSecondStep";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -29,10 +29,10 @@ export const StackRoutes = () => {
         }}
       />
       <Screen name="Scheduling" component={Scheduling} />
-      <Screen name="SchedulingComplete" component={SchedulingComplete} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="MyCars" component={MyCars} />
+      <Screen name="Success" component={Success} />
     </Navigator>
   );
 };

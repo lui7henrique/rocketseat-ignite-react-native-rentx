@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import {
   Keyboard,
@@ -25,6 +25,7 @@ type Params = {
 
 export const SignUpSecondStep = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const { user } = route.params as Params;
 
   const [password, setPassword] = useState("");
@@ -45,6 +46,16 @@ export const SignUpSecondStep = () => {
       await schema.validate({
         password,
         password_confirmation: confirmPassword,
+      });
+
+      navigation.navigate("Success", {
+        data: {
+          title: "Conta criada!",
+          confirmButton: {
+            title: "Ok",
+            action: () => navigation.navigate("SignIn"),
+          },
+        },
       });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {

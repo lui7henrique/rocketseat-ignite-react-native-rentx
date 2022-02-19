@@ -83,7 +83,17 @@ export const SchedulingDetails = () => {
         unavailable_dates: unavailableDates,
       });
 
-      navigation.navigate("SchedulingComplete");
+      navigation.navigate("Success", {
+        data: {
+          title: "Carro alugado!",
+          message:
+            "Agora você só precisa ir \n até a concessionária da RENTX \n pegar o seu automóvel.",
+          confirmButton: {
+            title: "Ok",
+            action: () => navigation.navigate("Home"),
+          },
+        },
+      });
     } catch (err: unknown) {
       Toast.show({
         type: "error",
