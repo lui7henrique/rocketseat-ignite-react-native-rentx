@@ -26,7 +26,7 @@ export const SignIn = () => {
           keyboardType="email-address"
           autoCorrect={false}
         />
-        <Input iconName="lock" placeholder="Senha" />
+        <Input iconName="lock" placeholder="Senha" isPassword />
       </S.Form>
       <S.Footer>
         <Button title="Login" onPress={() => {}} isLoading={false} />
