@@ -5,17 +5,19 @@ import { TextInputProps } from "react-native";
 
 type InputProps = {
   iconName: React.ComponentProps<typeof Feather>["name"];
-  placeholder: string;
 } & TextInputProps;
 
 export const Input = (props: InputProps) => {
-  const { iconName } = props;
+  const { iconName, ...rest } = props;
 
   const theme = useTheme();
 
   return (
     <S.Container>
-      <Feather name={iconName} size={24} color={theme.colors.text_detail} />
+      <S.Icon>
+        <Feather name={iconName} size={24} color={theme.colors.text_detail} />
+      </S.Icon>
+      <S.InputText {...rest} />
     </S.Container>
   );
 };

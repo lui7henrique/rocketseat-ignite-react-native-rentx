@@ -20,7 +20,13 @@ export const SignIn = () => {
       </S.Header>
 
       <S.Form>
-        <Input iconName="mail" placeholder="teste" />
+        <Input
+          iconName="mail"
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCorrect={false}
+        />
+        <Input iconName="lock" placeholder="Senha" />
       </S.Form>
       <S.Footer>
         <Button title="Login" onPress={() => {}} isLoading={false} />
