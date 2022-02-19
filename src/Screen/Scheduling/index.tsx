@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
+import { Alert, StatusBar } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MarkingProps } from "react-native-calendars/src/calendar/day/marking";
 import { DateData } from "react-native-calendars";
@@ -83,9 +83,25 @@ export const Scheduling = () => {
       return;
     }
 
+    const allDates = Object.keys(markedDates).map((date) => {
+      return {
+        date: date,
+        markedDay: markedDates[date],
+      };
+    });
+
+    const filteredDates = allDates.filter(
+      (date) =>
+        !date.markedDay.disabled &&
+        !date.markedDay.inactive &&
+        !date.markedDay.disableTouchEvent
+    );
+
+    const rentalDates = filteredDates.map((date) => date.date);
+
     navigation.navigate("SchedulingDetails", {
       car,
-      dates: Object.keys(markedDates),
+      dates: rentalDates,
     });
   };
 
