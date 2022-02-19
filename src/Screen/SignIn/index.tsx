@@ -3,7 +3,6 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
 } from "react-native";
 import { useTheme } from "styled-components";
 import * as Yup from "yup";
@@ -27,10 +26,10 @@ export const SignIn = () => {
   const handleSignIn = async () => {
     try {
       const schema = Yup.object().shape({
+        password: Yup.string().required("Senha obrigatória 😉"),
         email: Yup.string()
           .required("E-mail obrigatório 😉")
           .email("Digite um e-mail válido! 😉"),
-        password: Yup.string().required("Senha obrigatória 😉"),
       });
 
       await schema.validate({ email, password });

@@ -22,7 +22,7 @@ export const SchedulingComplete = () => {
         translucent
         backgroundColor={theme.colors.header}
       />
-      <LogoSvg width={width}></LogoSvg>
+      <LogoSvg width={width} />
       <S.Content>
         <DoneSvg />
         <S.Title>Carro alugado!</S.Title>
