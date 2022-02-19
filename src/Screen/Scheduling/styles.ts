@@ -15,8 +15,7 @@ export const Header = styled.View`
 
   background-color: ${({ theme }) => theme.colors.header};
 
-  margin-top: ${getStatusBarHeight()}px;
-  padding: 25px;
+  padding: ${getStatusBarHeight() + 24}px 25px;
 `;
 
 export const Title = styled.Text`
