@@ -27,7 +27,6 @@ export const Home = () => {
         const { data } = await api.get<CarType[]>("/cars");
         setCars(data);
       } catch (err: unknown) {
-        console.log(err);
       } finally {
         setLoading(false);
       }

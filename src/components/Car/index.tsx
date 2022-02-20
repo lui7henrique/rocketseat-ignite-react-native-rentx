@@ -18,7 +18,7 @@ type CarProps = {
 } & TouchableOpacityProps;
 
 export const Car = ({ data, startDate, endDate, ...rest }: CarProps) => {
-  const { brand, name, rent, thumbnail } = data;
+  const { brand, name, period, price, thumbnail } = data;
 
   const typeIcon = {
     gasoline_motor: <GasolineSvg />,
@@ -35,8 +35,8 @@ export const Car = ({ data, startDate, endDate, ...rest }: CarProps) => {
           <S.Name>{name}</S.Name>
           <S.About>
             <S.Rent>
-              <S.Period>{rent.period}</S.Period>
-              <S.Price>R$ {rent.price}</S.Price>
+              <S.Period>{period}</S.Period>
+              <S.Price>R$ {price}</S.Price>
             </S.Rent>
             <S.Type>{typeIcon[data.fuel_type]}</S.Type>
           </S.About>

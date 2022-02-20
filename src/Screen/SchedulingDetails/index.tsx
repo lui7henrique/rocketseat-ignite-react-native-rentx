@@ -137,8 +137,8 @@ export const SchedulingDetails = () => {
             <S.Name>{car.name}</S.Name>
           </S.Description>
           <S.Rent>
-            <S.Period>{car.rent.period}</S.Period>
-            <S.Price>R$ {car.rent.price}</S.Price>
+            <S.Period>{car.period}</S.Period>
+            <S.Price>R$ {car.price}</S.Price>
           </S.Rent>
         </S.Details>
 
@@ -182,12 +182,10 @@ export const SchedulingDetails = () => {
           <S.RentalPriceDetails>
             <S.RentalPriceLabel>Total</S.RentalPriceLabel>
             <S.RentalPriceQuota>
-              R$ {car.rent.price} x{dates.length} diárias
+              R$ {car.price} x{dates.length} diárias
             </S.RentalPriceQuota>
           </S.RentalPriceDetails>
-          <S.RentalPriceTotal>
-            R$ {car.rent.price * dates.length}
-          </S.RentalPriceTotal>
+          <S.RentalPriceTotal>R$ {car.price * dates.length}</S.RentalPriceTotal>
         </S.RentalPrice>
       </S.Content>
 

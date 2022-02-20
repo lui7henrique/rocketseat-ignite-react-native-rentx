@@ -2,9 +2,10 @@ import * as S from "./styles";
 import { FlatList, ViewToken } from "react-native";
 import { useState, useRef } from "react";
 import { Bullet } from "../Bullet";
+import { CarType } from "../../types/car";
 
 type ImageSliderProps = {
-  images: string[];
+  images: CarType["photos"];
 };
 
 type ChangeImageProps = {
@@ -24,18 +25,18 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
     <S.Container>
       <S.ImageIndexes>
         {images.map((_, index) => (
-          <Bullet active={index === imageIndex} key={String(index)} />
+          <Bullet active={index === imageIndex} key={String(_.id)} />
         ))}
       </S.ImageIndexes>
 
       <FlatList
         data={images}
-        keyExtractor={(key) => key}
+        keyExtractor={(key) => key.car_id}
         renderItem={({ item }) => (
           <S.CarImageWrapper>
             <S.CarImage
               source={{
-                uri: item,
+                uri: item.photo,
               }}
               resizeMode="contain"
             />

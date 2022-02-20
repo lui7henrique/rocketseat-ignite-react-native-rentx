@@ -3,10 +3,8 @@ export type CarType = {
   brand: string;
   name: string;
   about: string;
-  rent: {
-    period: string;
-    price: number;
-  };
+  period: string;
+  price: number;
   fuel_type: string;
   thumbnail: string;
   accessories: [
@@ -22,5 +20,9 @@ export type CarType = {
       name: string;
     }
   ];
-  photos: Array<string>;
+  photos: Array<{
+    id: string;
+    car_id: string;
+    photo: string;
+  }>;
 };

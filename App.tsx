@@ -36,10 +36,8 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppProvider>
-        <Routes />
-        <Toast />
-      </AppProvider>
+      <Routes />
+      <Toast />
     </ThemeProvider>
   );
 }

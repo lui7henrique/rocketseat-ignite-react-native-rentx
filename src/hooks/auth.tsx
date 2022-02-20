@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { createContext, useContext, useState } from "react";
 import { api } from "../services/api";
 
@@ -32,6 +33,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
+  const navigation = useNavigation();
 
   async function signIn({ email, password }: SignInCredentials) {
     const { data } = await api.post("/sessions", {
@@ -43,6 +45,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     setData({ token, user });
+
+    navigation.navigate("Home");
   }
 
   return (
