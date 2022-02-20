@@ -15,10 +15,12 @@ import { Input } from "../../components/Input";
 
 import * as S from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn } = useAuth();
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -34,12 +36,7 @@ export const SignIn = () => {
 
       await schema.validate({ email, password });
 
-      if (
-        email === "luizhenrique@fodao.com" &&
-        password === "luizhenriquefodao"
-      ) {
-        navigation.navigate("Home");
-      }
+      await signIn({ email, password });
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         return Toast.show({
