@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useMemo } from "react";
 import { StatusBar } from "react-native";
+import uuid from "react-native-uuid";
 
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
@@ -75,7 +75,7 @@ export const CarDetails = () => {
             <Accessory
               icon={iconByType[accessory.type] || CarSvg}
               name={accessory.name}
-              key={JSON.stringify(accessory)}
+              key={String(uuid.v4())}
             />
           ))}
         </S.Accessories>

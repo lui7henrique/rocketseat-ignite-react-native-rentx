@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { format } from "date-fns";
 import Toast from "react-native-toast-message";
+import uuid from "react-native-uuid";
 
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
@@ -147,7 +148,7 @@ export const SchedulingDetails = () => {
             <Accessory
               icon={iconByType[accessory.type] || CarSvg}
               name={accessory.name}
-              key={JSON.stringify(accessory)}
+              key={String(uuid.v4())}
             />
           ))}
         </S.Accessories>

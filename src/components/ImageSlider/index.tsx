@@ -1,3 +1,5 @@
+import uuid from "react-native-uuid";
+
 import * as S from "./styles";
 import { FlatList, ViewToken } from "react-native";
 import { useState, useRef } from "react";
@@ -31,7 +33,7 @@ export const ImageSlider = ({ images }: ImageSliderProps) => {
 
       <FlatList
         data={images}
-        keyExtractor={(key) => key.car_id}
+        keyExtractor={(key) => String(uuid.v4())}
         renderItem={({ item }) => (
           <S.CarImageWrapper>
             <S.CarImage
