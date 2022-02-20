@@ -2,6 +2,10 @@
 
 - [Figma](https://www.figma.com/file/4ojyGi2mGuQaGK0sUHMAqB/RentX-Ignite?node-id=0%3A1)
 
+## 🗄 Service
+
+- [Back-end](https://github.com/rodrigorgtic/rentx-api-ignite)
+
 ## 🔨 Tools
 
 - [Typescript](https://www.typescriptlang.org/)
@@ -10,7 +14,6 @@
 - [JSON Server](https://www.npmjs.com/package/json-server)
 - [React Native Calendars](https://github.com/wix/react-native-calendars)
 - [Styled Components](https://styled-components.com/)
-
 
 ## 💻 Requirements
 

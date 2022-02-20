@@ -14,6 +14,9 @@ import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 
 import * as S from "./styles";
+import { api } from "../../../services/api";
+import axios from "axios";
+import { get } from "lodash";
 
 type Params = {
   user: {
@@ -46,6 +49,13 @@ export const SignUpSecondStep = () => {
       await schema.validate({
         password,
         password_confirmation: confirmPassword,
+      });
+
+      await api.post("users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
       });
 
       navigation.navigate("Success", {
