@@ -16,10 +16,12 @@ import Animated, {
 
 import * as S from "./styles";
 import theme from "../../styles/theme";
+import { useAuth } from "../../hooks/auth";
 
 export const Splash = () => {
   const navigation = useNavigation();
   const splashAnimation = useSharedValue(0);
+  const { user } = useAuth();
 
   const brandStyle = useAnimatedStyle(() => {
     return {
@@ -54,7 +56,7 @@ export const Splash = () => {
   });
 
   const startApp = () => {
-    navigation.navigate("Home");
+    !!user ? navigation.navigate("Home") : navigation.navigate("SignIn");
   };
 
   useEffect(() => {

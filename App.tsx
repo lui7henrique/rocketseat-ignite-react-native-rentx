@@ -2,6 +2,7 @@ import React from "react";
 import AppLoading from "expo-app-loading";
 import { ThemeProvider } from "styled-components";
 import { Routes } from "./src/routes";
+import { NavigationContainer } from "@react-navigation/native";
 
 import {
   useFonts,
@@ -36,8 +37,12 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
-      <Toast />
+      <NavigationContainer>
+        <AppProvider>
+          <Routes />
+        </AppProvider>
+        <Toast />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }

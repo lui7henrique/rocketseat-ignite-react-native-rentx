@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { StatusBar, BackHandler } from "react-native";
+import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import uuid from "react-native-uuid";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
 
 import { api } from "../../services/api";
 
@@ -35,18 +34,8 @@ export const Home = () => {
     fetchCars();
   }, []);
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  }, []);
-
   const handleCarDetails = (car: CarType) => {
     navigation.navigate("CarDetails", { car });
-  };
-
-  const handleOpenMyCars = () => {
-    navigation.navigate("MyCars");
   };
 
   return (
@@ -78,13 +67,6 @@ export const Home = () => {
           )}
         />
       )}
-      <S.MyCarsButton onPress={handleOpenMyCars}>
-        <Ionicons
-          name="ios-car-sport"
-          size={32}
-          color={theme.colors.background_primary}
-        />
-      </S.MyCarsButton>
     </S.Container>
   );
 };
